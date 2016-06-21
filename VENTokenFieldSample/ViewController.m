@@ -24,6 +24,7 @@
     self.tokenField.dataSource = self;
     self.tokenField.placeholderText = NSLocalizedString(@"Enter names here", nil);
     self.tokenField.toLabelText = NSLocalizedString(@"Post to:", nil);
+    
     [self.tokenField setColorScheme:[UIColor colorWithRed:61/255.0f green:149/255.0f blue:206/255.0f alpha:1.0f]];
     self.tokenField.delimiters = @[@",", @";", @"--"];
     [self.tokenField becomeFirstResponder];
@@ -70,6 +71,10 @@
 - (NSString *)tokenFieldCollapsedText:(VENTokenField *)tokenField
 {
     return [NSString stringWithFormat:@"%tu people", [self.names count]];
+}
+
+- (NSURL *)tokenField:(VENTokenField *)tokenField avatarImageURLAtIndex:(NSUInteger)index {
+    return [[NSURL alloc] initWithString:@"https://scontent.fbkk1-1.fna.fbcdn.net/v/t1.0-9/946437_10205442819818974_454076536658233650_n.jpg?oh=1ee586269127593d440e52aa87d0a450&oe=57C3EE57"];
 }
 
 @end

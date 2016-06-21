@@ -32,6 +32,7 @@ static const CGFloat VENTokenFieldDefaultToLabelPadding     = 5.0;
 static const CGFloat VENTokenFieldDefaultTokenPadding       = 2.0;
 static const CGFloat VENTokenFieldDefaultMinInputWidth      = 80.0;
 static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
+static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
 
 
 @interface VENTokenField () <VENBackspaceTextFieldDelegate>
@@ -299,6 +300,7 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
 {
     for (NSUInteger i = 0; i < [self numberOfTokens]; i++) {
         NSString *title = [self titleForTokenAtIndex:i];
+        NSURL *avatarImageURL = [self avatarForTokenAtIndex:i];
         VENToken *token = [[VENToken alloc] init];
 
         __weak VENToken *weakToken = token;
@@ -308,6 +310,7 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
         };
 
         [token setTitleText:[NSString stringWithFormat:@"%@,", title]];
+        [token setAvatarImageURL:avatarImageURL];
         token.colorScheme = [self colorSchemeForTokenAtIndex:i];
         
         [self.tokens addObject:token];
@@ -315,7 +318,8 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
         if (*currentX + token.width <= self.scrollView.contentSize.width) { // token fits in current line
             token.frame = CGRectMake(*currentX, *currentY, token.width, token.height);
         } else {
-            *currentY += token.height;
+            *currentY += token.height + VENTokenFiledDefaultMinimumLineSpacing
+            ;
             *currentX = 0;
             CGFloat tokenWidth = token.width;
             if (tokenWidth > self.scrollView.contentSize.width) { // token is wider than max width
@@ -523,6 +527,13 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
     }
     
     return [NSString string];
+}
+
+- (NSURL *)avatarForTokenAtIndex:(NSUInteger)index {
+    if ([self.dataSource respondsToSelector:@selector(tokenField:avatarImageURLAtIndex:)]) {
+        return [self.dataSource tokenField:self avatarImageURLAtIndex:index];
+    }
+    return [[NSURL alloc] init];
 }
 
 - (NSUInteger)numberOfTokens

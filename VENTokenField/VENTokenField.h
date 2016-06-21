@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol VENTokenFieldDataSource <NSObject>
 @optional
 - (NSString *)tokenField:(VENTokenField *)tokenField titleForTokenAtIndex:(NSUInteger)index;
+- (NSURL *)tokenField:(VENTokenField *)tokenField avatarImageURLAtIndex:(NSUInteger)index;
 - (NSUInteger)numberOfTokensInTokenField:(VENTokenField *)tokenField;
 - (NSString *)tokenFieldCollapsedText:(VENTokenField *)tokenField;
 - (UIColor *)tokenField:(VENTokenField *)tokenField colorSchemeForTokenAtIndex:(NSUInteger)index;
@@ -63,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat horizontalInset;
 @property (assign, nonatomic) CGFloat tokenPadding;
 @property (assign, nonatomic) CGFloat minInputWidth;
+@property (assign, nonatomic) CGFloat minimumLineSpacing;
 
 @property (assign, nonatomic) UIKeyboardType inputTextFieldKeyboardType;
 @property (assign, nonatomic) UIKeyboardAppearance inputTextFieldKeyboardAppearance;

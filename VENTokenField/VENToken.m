@@ -20,12 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "VENToken.h"
 
 @interface VENToken ()
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @end
 
 @implementation VENToken
@@ -42,20 +45,21 @@
 
 - (void)setUpInit
 {
-    self.backgroundView.layer.cornerRadius = 5;
+    self.layer.cornerRadius = self.frame.size.height / 2;
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapToken:)];
-    self.colorScheme = [UIColor blueColor];
-    self.titleLabel.textColor = self.colorScheme;
     [self addGestureRecognizer:self.tapGestureRecognizer];
 }
 
 - (void)setTitleText:(NSString *)text
 {
     self.titleLabel.text = text;
-    self.titleLabel.textColor = self.colorScheme;
     [self.titleLabel sizeToFit];
     self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetMaxX(self.titleLabel.frame) + 3, CGRectGetHeight(self.frame));
     [self.titleLabel sizeToFit];
+}
+
+- (void)setAvatarImageURL:(NSURL *)avatarImageURL {
+    [self.avatar sd_setImageWithURL:avatarImageURL placeholderImage:nil];
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -63,14 +67,12 @@
     _highlighted = highlighted;
     UIColor *textColor = highlighted ? [UIColor whiteColor] : self.colorScheme;
     UIColor *backgroundColor = highlighted ? self.colorScheme : [UIColor clearColor];
-    self.titleLabel.textColor = textColor;
     self.backgroundView.backgroundColor = backgroundColor;
 }
 
 - (void)setColorScheme:(UIColor *)colorScheme
 {
     _colorScheme = colorScheme;
-    self.titleLabel.textColor = self.colorScheme;
     [self setHighlighted:_highlighted];
 }
 
