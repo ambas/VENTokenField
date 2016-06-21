@@ -596,8 +596,11 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
 
 
 - (CGSize)intrinsicContentSize {
-    CGSize size = CGSizeMake(self.frame.size.width, 44);
-    return size;
+    if (self.frame.size.height >= 44) {
+        return [super intrinsicContentSize];
+    } else {
+        return CGSizeMake(self.frame.size.width, 44);
+    }
 }
 
 
