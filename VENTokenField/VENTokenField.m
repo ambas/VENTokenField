@@ -595,6 +595,12 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
 }
 
 
+- (CGSize)intrinsicContentSize {
+    CGSize size = CGSizeMake(self.frame.size.width, 44);
+    return size;
+}
+
+
 #pragma mark - VENBackspaceTextFieldDelegate
 
 - (void)textFieldDidEnterBackspace:(VENBackspaceTextField *)textField
