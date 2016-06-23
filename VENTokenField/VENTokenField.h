@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol VENTokenFieldDelegate <NSObject>
 @optional
 - (void)tokenField:(VENTokenField *)tokenField didEnterText:(NSString *)text;
-- (void)tokenField:(VENTokenField *)tokenField didDeleteTokenAtIndex:(NSUInteger)index;
+- (void)tokenField:(VENTokenField *)tokenField didDeleteTokenAtIndex:(NSInteger)index;
 - (void)tokenField:(VENTokenField *)tokenField didChangeText:(nullable NSString *)text;
 - (void)tokenFieldDidBeginEditing:(VENTokenField *)tokenField;
 - (void)tokenField:(VENTokenField *)tokenField didChangeContentHeight:(CGFloat)height;
@@ -36,11 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol VENTokenFieldDataSource <NSObject>
 @optional
-- (NSString *)tokenField:(VENTokenField *)tokenField titleForTokenAtIndex:(NSUInteger)index;
-- (NSURL *)tokenField:(VENTokenField *)tokenField avatarImageURLAtIndex:(NSUInteger)index;
-- (NSUInteger)numberOfTokensInTokenField:(VENTokenField *)tokenField;
+- (NSString *)tokenField:(VENTokenField *)tokenField titleForTokenAtIndex:(NSInteger)index;
+- (NSURL *)tokenField:(VENTokenField *)tokenField avatarImageURLAtIndex:(NSInteger)index;
+- (NSInteger)numberOfTokensInTokenField:(VENTokenField *)tokenField;
 - (NSString *)tokenFieldCollapsedText:(VENTokenField *)tokenField;
-- (UIColor *)tokenField:(VENTokenField *)tokenField colorSchemeForTokenAtIndex:(NSUInteger)index;
+- (UIColor *)tokenField:(VENTokenField *)tokenField colorSchemeForTokenAtIndex:(NSInteger)index;
 @end
 
 

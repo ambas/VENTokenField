@@ -321,7 +321,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
 
 - (void)layoutTokensWithCurrentX:(CGFloat *)currentX currentY:(CGFloat *)currentY
 {
-    for (NSUInteger i = 0; i < [self numberOfTokens]; i++) {
+    for (NSInteger i = 0; i < [self numberOfTokens]; i++) {
         NSString *title = [self titleForTokenAtIndex:i];
         NSURL *avatarImageURL = [self avatarForTokenAtIndex:i];
         VENToken *token = [[VENToken alloc] init];
@@ -534,7 +534,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
     }
 }
 
-- (UIColor *)colorSchemeForTokenAtIndex:(NSUInteger)index {
+- (UIColor *)colorSchemeForTokenAtIndex:(NSInteger)index {
     
     if ([self.dataSource respondsToSelector:@selector(tokenField:colorSchemeForTokenAtIndex:)]) {
         return [self.dataSource tokenField:self colorSchemeForTokenAtIndex:index];
@@ -545,7 +545,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
 
 #pragma mark - Data Source
 
-- (NSString *)titleForTokenAtIndex:(NSUInteger)index
+- (NSString *)titleForTokenAtIndex:(NSInteger)index
 {
     if ([self.dataSource respondsToSelector:@selector(tokenField:titleForTokenAtIndex:)]) {
         return [self.dataSource tokenField:self titleForTokenAtIndex:index];
@@ -554,14 +554,14 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
     return [NSString string];
 }
 
-- (NSURL *)avatarForTokenAtIndex:(NSUInteger)index {
+- (NSURL *)avatarForTokenAtIndex:(NSInteger)index {
     if ([self.dataSource respondsToSelector:@selector(tokenField:avatarImageURLAtIndex:)]) {
         return [self.dataSource tokenField:self avatarImageURLAtIndex:index];
     }
     return [[NSURL alloc] init];
 }
 
-- (NSUInteger)numberOfTokens
+- (NSInteger)numberOfTokens
 {
     if ([self.dataSource respondsToSelector:@selector(numberOfTokensInTokenField:)]) {
         return [self.dataSource numberOfTokensInTokenField:self];
