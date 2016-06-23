@@ -332,7 +332,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
             [weakSelf didTapToken:weakToken];
         };
 
-        [token setTitleText:[NSString stringWithFormat:@"%@,", title]];
+        [token setTitleText:[NSString stringWithFormat:@"%@", title]];
         [token setAvatarImageURL:avatarImageURL];
         token.colorScheme = [self colorSchemeForTokenAtIndex:i];
         
