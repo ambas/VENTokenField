@@ -18,15 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-1u-NEp" customClass="VENTokenField">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-1u-NEp" customClass="VENTokenField">
                                 <rect key="frame" x="0.0" y="72" width="600" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="8OB-LY-9eI"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="8OB-LY-9eI"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.95686274770000002" green="0.24705882370000001" blue="0.3058823645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qwN-1u-NEp" firstAttribute="top" secondItem="ASM-YY-uQe" secondAttribute="topMargin" id="OgZ-FJ-hvY"/>
                             <constraint firstItem="qwN-1u-NEp" firstAttribute="leading" secondItem="ASM-YY-uQe" secondAttribute="leading" id="RsS-AL-yPE"/>

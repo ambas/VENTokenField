@@ -23,6 +23,8 @@
 #import "VENTokenField.h"
 
 #import <FrameAccessor/FrameAccessor.h>
+#import <Aspects/Aspects.h>
+#import <Masonry/Masonry.h>
 #import "VENToken.h"
 #import "VENBackspaceTextField.h"
 
@@ -96,6 +98,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
     self.colorScheme = [UIColor blueColor];
     self.toLabelTextColor = [UIColor colorWithRed:112/255.0f green:124/255.0f blue:124/255.0f alpha:1.0f];
     self.inputTextFieldTextColor = [UIColor colorWithRed:38/255.0f green:39/255.0f blue:41/255.0f alpha:1.0f];
+    
     
     // Accessing bare value to avoid kicking off a premature layout run.
     _toLabelText = NSLocalizedString(@"To:", nil);
@@ -244,9 +247,29 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
                                                     self.horizontalInset,
                                                     self.verticalInset,
                                                     self.horizontalInset);
+    NSError *error;
+    [self.scrollView aspect_hookSelector:@selector(intrinsicContentSize) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo, BOOL animate) {
+        NSInvocation *invocation = aspectInfo.originalInvocation;
+        [self.scrollView layoutIfNeeded];
+        CGSize contentSize = self.scrollView.contentSize;
+        [invocation setReturnValue:&contentSize];
+    } error:&error];
+    
+//    [self.scrollView aspect_hookSelector:@selector(intrinsicContentSize) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+//        if ([aspectInfo.instance isBeingDismissed]) {
+//            NSInvocation *invocation = aspectInfo.originalInvocation;
+//                    CGSize contentSize = self.scrollView.contentSize;
+//                    [invocation setReturnValue:&contentSize];
+//        }
+//    } error:NULL];
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
     [self addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0);
+        make.left.equalTo(self).offset(0);
+        make.right.equalTo(self).offset(0);
+        make.bottom.equalTo(self).offset(0);
+    }];
 }
 
 - (void)layoutInputTextFieldWithCurrentX:(CGFloat *)currentX currentY:(CGFloat *)currentY clearInput:(BOOL)clearInput
@@ -331,6 +354,8 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
         [self.scrollView addSubview:token];
     }
 }
+
+
 
 
 #pragma mark - Private
@@ -593,16 +618,6 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
     }
     return YES;
 }
-
-
-- (CGSize)intrinsicContentSize {
-    if (self.frame.size.height >= 44) {
-        return [super intrinsicContentSize];
-    } else {
-        return CGSizeMake(self.frame.size.width, 44);
-    }
-}
-
 
 #pragma mark - VENBackspaceTextFieldDelegate
 
