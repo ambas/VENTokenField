@@ -23,7 +23,6 @@
 #import "VENTokenField.h"
 
 #import <FrameAccessor/FrameAccessor.h>
-#import <Aspects/Aspects.h>
 #import <Masonry/Masonry.h>
 #import "VENToken.h"
 #import "VENBackspaceTextField.h"
@@ -247,21 +246,7 @@ static const CGFloat VENTokenFiledDefaultMinimumLineSpacing = 10.0;
                                                     self.horizontalInset,
                                                     self.verticalInset,
                                                     self.horizontalInset);
-    NSError *error;
-    [self.scrollView aspect_hookSelector:@selector(intrinsicContentSize) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo, BOOL animate) {
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        [self.scrollView layoutIfNeeded];
-        CGSize contentSize = self.scrollView.contentSize;
-        [invocation setReturnValue:&contentSize];
-    } error:&error];
-    
-//    [self.scrollView aspect_hookSelector:@selector(intrinsicContentSize) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
-//        if ([aspectInfo.instance isBeingDismissed]) {
-//            NSInvocation *invocation = aspectInfo.originalInvocation;
-//                    CGSize contentSize = self.scrollView.contentSize;
-//                    [invocation setReturnValue:&contentSize];
-//        }
-//    } error:NULL];
+
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {

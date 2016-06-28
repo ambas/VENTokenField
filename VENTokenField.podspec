@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
   s.resources   = ["VENTokenField/**/*.{xib,png}"]
   s.dependency 'FrameAccessor', '~> 1.0'
   s.dependency 'SDWebImage'
-  s.dependency 'Aspects'
   s.dependency 'Masonry'
   s.platform     = :ios, '7.0'
   s.requires_arc = true
